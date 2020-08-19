@@ -3,11 +3,13 @@ from boto3 import session
 from botocore.client import Config
 import logging
 from colors import color
+from pathlib import Path
 
 ACCESS_ID = 'IGPKYQNRTQJ3JPRMCRRP'
 ACCESS_KEY = 'I9WaEh/s5CtQEQr4CCZZUZ4X0TJe1hKwTSWt4X68dVI'
 REGION = 'ams3'
 URL = 'https://ams3.digitaloceanspaces.com'
+PATH = 'ai-images-bucket/'
 
 s3 = boto3.resource('s3', region_name=REGION, endpoint_url=URL, aws_access_key_id=ACCESS_ID,
                     aws_secret_access_key=ACCESS_KEY)
@@ -19,13 +21,20 @@ def download_all_files():
     file_count = 0
     for s3_object in my_bucket.objects.all():
         filename = s3_object.key
+        dir = ''
+        if '/' in filename:
+            dir = filename.rsplit('/')[0]
+            dir += '/'
+            filename = filename.rsplit('/', 1)[-1]
+            print(dir)
         try:
             print(color("%s \ndownloading...\n" % filename, fg='blue'))
-            my_bucket.download_file(s3_object.key, 'ai-images-bucket/' + filename)
+            Path(PATH + dir).mkdir(parents=True, exist_ok=True)
+            my_bucket.download_file(s3_object.key, PATH + dir + filename)
             print(color("Success\n", fg="lime"))
             file_count += 1
         except Exception as e:
-            logging.error('FilePath: %s' % filename, exc_info=True)
+            logging.error(f'FilePath: {filename}', exc_info=True)
             error_count += 1
             print(color("Error encountered: %s" % e, fg="#ff1a1a"))
             continue
