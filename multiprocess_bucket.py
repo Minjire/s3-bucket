@@ -24,38 +24,28 @@ s3 = boto3.resource('s3', region_name=REGION, endpoint_url=URL, aws_access_key_i
 
 my_bucket = s3.Bucket('capital')
 
+
 # my_bucket = s3.Bucket('ai-images')
 
 
 def get_paths():
     for s3_object in my_bucket.objects.all():
         filename = s3_object.key
-        # if 'var/www/capitalalliance/public/files/vehicles/vehicle_pics' in filename:
-        #     # append to array
-        #     PATHS.append(filename)
-        # else:
-        #     pass
-
-        PATHS.append(filename)
+        if 'var/www/capitalalliance/public/files/vehicles/vehicle_pics' in filename:
+            # append to array
+            PATHS.append(filename)
+        else:
+            pass
 
 
 def download_all_files(path):
     print(path)
-    # dir = path.rsplit('/', 3)[-3]
-    # dir += '/'
-    # temp = path.rsplit('/', 1)[-1]
-    if len(path.split('/')) >= 2:
-        dir = path.split('/')[0]
-        dir += '/'
-        temp = path.rsplit('/', 1)[-1]
-    else:
-        temp = path
-        dir = ''
-
-    print(dir)
+    dir = path.rsplit('/', 3)[-3]
+    dir += '/'
+    temp = path.rsplit('/', 1)[-1]
 
     try:
-        print("%s \ndownloading...\n" % path)
+        print(f"\ndownloading...{path}\n")
         Path(PATH + dir).mkdir(parents=True, exist_ok=True)
         my_bucket.download_file(path, PATH + dir + temp)
         print("Success\n")
