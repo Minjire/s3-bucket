@@ -5,17 +5,12 @@ import multiprocessing
 import logging
 from pathlib import Path
 
-# ACCESS_ID = 'IGPKYQNRTQJ3JPRMCRRP'
-# ACCESS_KEY = 'I9WaEh/s5CtQEQr4CCZZUZ4X0TJe1hKwTSWt4X68dVI'
-# REGION = 'ams3'
-# URL = 'https://ams3.digitaloceanspaces.com'
-# PATH = 'ai-images-bucket/'
 
-ACCESS_ID = 'PEDMJAWDGWVCCNUVCXZK'
-ACCESS_KEY = '+cbk3hB5CEGnGzWeDtJtu9B7KW7pvlcMf/eAIp9SkhI'
-REGION = 'sfo2'
+ACCESS_ID = ''
+ACCESS_KEY = ''
+REGION = ''
 URL = 'https://sfo2.digitaloceanspaces.com'
-PATH = 'capital_ai-images-bucket/'
+PATH = ''
 
 PATHS = []
 
