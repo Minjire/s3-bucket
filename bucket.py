@@ -5,11 +5,11 @@ import logging
 from colors import color
 from pathlib import Path
 
-ACCESS_ID = 'IGPKYQNRTQJ3JPRMCRRP'
-ACCESS_KEY = 'I9WaEh/s5CtQEQr4CCZZUZ4X0TJe1hKwTSWt4X68dVI'
+ACCESS_ID = ''
+ACCESS_KEY = ''
 REGION = 'ams3'
 URL = 'https://ams3.digitaloceanspaces.com'
-PATH = 'ai-images-bucket/'
+PATH = ''
 
 s3 = boto3.resource('s3', region_name=REGION, endpoint_url=URL, aws_access_key_id=ACCESS_ID,
                     aws_secret_access_key=ACCESS_KEY)
